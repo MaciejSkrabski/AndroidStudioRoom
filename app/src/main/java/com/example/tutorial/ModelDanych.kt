@@ -31,3 +31,12 @@ data class Ogloszenie (
     val tresc: String,
     val autor: Int
 )
+
+@Entity(tableName="tagi", foreignKeys = [ForeignKey(entity = Ogloszenie::class,
+    parentColumns = arrayOf("tytul"),
+    childColumns = arrayOf("ogloszenie"))])
+data class Tag (
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    val tag: String,
+    val ogloszenie: String
+)

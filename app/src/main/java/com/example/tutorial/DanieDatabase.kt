@@ -7,3 +7,8 @@ import androidx.room.RoomDatabase
 abstract class DanieDatabase: RoomDatabase(){
     abstract fun danieDao(): IDanie
 }
+
+@Database(entities = [Osoba::class, Ogloszenie::class, Tag::class], version = 1)
+abstract class SlupOgloszeniowyDB: RoomDatabase(){
+    abstract fun osobaDao(): IOsoba
+}
