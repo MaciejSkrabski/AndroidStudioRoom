@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        
         var add = findViewById<Button>(R.id.buttonAdd)
         add.setOnClickListener { Toast.makeText(this, "Guzik!", Toast.LENGTH_SHORT).show() }
     }
