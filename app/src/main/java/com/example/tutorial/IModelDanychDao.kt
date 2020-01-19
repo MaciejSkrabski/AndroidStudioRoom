@@ -22,11 +22,33 @@ interface IOsoba {
     @Query("SELECT * FROM osoby")
     fun wszystkieOsoby(): List<Osoba>
 
-    /*@Query("UPDATE danie SET NAME = $n, DESC = $d WHERE ID = $i")
-    fun zmienDanie(n:String, d:String, i:Int): List<Danie>*/
-
     @Insert
     fun dodajOsobe(osoba: Osoba)
+
+    @Delete
+    fun delete()
+}
+
+@Dao
+interface ITag {
+    @Query("SELECT * FROM tagi")
+    fun wszystkieOsoby(): List<Tag>
+
+
+    @Insert
+    fun dodajTag(tag: Tag)
+
+    @Delete
+    fun delete()
+}
+
+@Dao
+interface IOgloszenie {
+    @Query("SELECT * FROM ogloszenia")
+    fun wszystkieOgloszenia(): List<Ogloszenie>
+
+    @Insert
+    fun dodajOgloszenie(ogloszenie: Ogloszenie)
 
     @Delete
     fun delete()

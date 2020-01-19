@@ -12,4 +12,5 @@ abstract class DanieDatabase: RoomDatabase(){
 @Database(entities = [Osoba::class, Ogloszenie::class, Tag::class], version = 1)
 abstract class SlupOgloszeniowyDB: RoomDatabase(){
     abstract fun osobaDao(): IOsoba
+    abstract fun ogloszenieDao(): IOgloszenie
 }
