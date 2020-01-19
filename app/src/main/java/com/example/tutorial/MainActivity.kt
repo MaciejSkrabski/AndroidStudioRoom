@@ -16,9 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val db = Room.databaseBuilder(
-            this, SlupOgloszeniowyDB::class.java,"slup_ogloszeniowy"
-        ).build()
+        val db = SlupOgloszeniowyDB.getInstance(this)
 
 
 
@@ -42,4 +40,6 @@ class MainActivity : AppCompatActivity() {
 //        db.ogloszenieDao().dodajOgloszenie(ogloszenie)
 //            //.dodajDanie(Danie(name=edit_text_name.text.toString(), desc=edit_text_desc.text.toString()))
 //    }
+
+
 }

@@ -5,12 +5,12 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity
-data class Danie (
-    @PrimaryKey(autoGenerate = true) val id: Int=0,
-    val name: String,
-    val desc: String
-)
+//@Entity
+//data class Danie (
+//    @PrimaryKey(autoGenerate = true) val id: Int=0,
+//    val name: String,
+//    val desc: String
+//)
 
 @Entity(tableName = "osoby")
 data class Osoba (
