@@ -4,7 +4,6 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.io.StringBufferInputStream
 
 @Entity
 data class Danie (
@@ -29,14 +28,13 @@ data class Ogloszenie (
     @PrimaryKey(autoGenerate = true) val id: Int,
     val tytul: String,
     val tresc: String,
-    val autor: Int
+    val autor: Int,
+    @Embedded
+    val tag: Tag?
+
 )
 
-@Entity(tableName="tagi", foreignKeys = [ForeignKey(entity = Ogloszenie::class,
-    parentColumns = arrayOf("tytul"),
-    childColumns = arrayOf("ogloszenie"))])
+@Entity(tableName="tagi")
 data class Tag (
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    val tag: String,
-    val ogloszenie: String
+    val tag: String
 )

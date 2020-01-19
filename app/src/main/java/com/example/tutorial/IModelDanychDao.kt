@@ -1,6 +1,7 @@
 package com.example.tutorial
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
@@ -26,4 +27,7 @@ interface IOsoba {
 
     @Insert
     fun dodajOsobe(osoba: Osoba)
+
+    @Delete
+    fun delete()
 }
