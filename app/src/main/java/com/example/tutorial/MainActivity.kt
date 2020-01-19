@@ -17,12 +17,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val db = Room.databaseBuilder(
-            this, DanieDatabase::class.java,"meal_database"
-        )
-            .allowMainThreadQueries()
-            .build()
+            this, SlupOgloszeniowyDB::class.java,"slup_ogloszeniowy"
+        ).build()
 
-        val wszystkieDania = db.danieDao().pobierzWszystkieDania()
+
+
+
+        /*val wszystkieDania = db.danieDao().pobierzWszystkieDania()
 
         wszystkieDania.forEach{
             textView.append("\n id: ${it.id}, nazwa:${it.name}, opis:${it.desc}")
@@ -34,10 +35,11 @@ class MainActivity : AppCompatActivity() {
         add.setOnClickListener {
             Toast.makeText(this, "Guzik!", Toast.LENGTH_SHORT).show()
             dodaj(db)
-        }
+        }*/
     }
 
-    fun dodaj(db: DanieDatabase) {
-        db.danieDao().dodajDanie(Danie(name=edit_text_name.text.toString(), desc=edit_text_desc.text.toString()))
-    }
+//    fun dodajOgloszenie(db: SlupOgloszeniowyDB, ogloszenie: Ogloszenie) {
+//        db.ogloszenieDao().dodajOgloszenie(ogloszenie)
+//            //.dodajDanie(Danie(name=edit_text_name.text.toString(), desc=edit_text_desc.text.toString()))
+//    }
 }

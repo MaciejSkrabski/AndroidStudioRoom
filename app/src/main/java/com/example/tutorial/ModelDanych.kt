@@ -25,7 +25,8 @@ data class Osoba (
     childColumns = arrayOf("autor"),
     onDelete = ForeignKey.CASCADE)])
 data class Ogloszenie (
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val tytul: String,
     val tresc: String,
     val autor: Int,
@@ -35,6 +36,7 @@ data class Ogloszenie (
 
 @Entity(tableName="tagi")
 data class Tag (
-    @PrimaryKey(autoGenerate = true) val id: Int=0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int=0,
     val tag: String
 )

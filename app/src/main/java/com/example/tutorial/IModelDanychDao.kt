@@ -10,8 +10,8 @@ interface IDanie {
     @Query("SELECT * FROM danie")
     fun pobierzWszystkieDania(): List<Danie>
 
-    /*@Query("UPDATE danie SET NAME = $n, DESC = $d WHERE ID = $i")
-    fun zmienDanie(n:String, d:String, i:Int): List<Danie>*/
+    @Query("UPDATE danie SET NAME = :n, DESC = :d WHERE ID = :i")
+    fun zmienDanie(n:String, d:String, i:Int): List<Danie>
 
     @Insert
     fun dodajDanie(danie: Danie)
@@ -20,36 +20,45 @@ interface IDanie {
 @Dao
 interface IOsoba {
     @Query("SELECT * FROM osoby")
-    fun wszystkieOsoby(): List<Osoba>
+    suspend fun wszystkieOsoby(): List<Osoba>
+
+    @Query("SELECT * FROM osoby WHERE id=:id")
+    suspend fun OsobaPrzezId(id: Int): Osoba
 
     @Insert
-    fun dodajOsobe(osoba: Osoba)
+    suspend fun dodajOsobe(osoba: Osoba)
 
     @Delete
-    fun delete(osoba: Osoba)
+    suspend fun delete(osoba: Osoba)
 }
 
 @Dao
 interface ITag {
     @Query("SELECT * FROM tagi")
-    fun wszystkieOsoby(): List<Tag>
+    suspend fun wszystkieOsoby(): List<Tag>
 
+    @Query("SELECT * FROM tagi WHERE id=:id")
+    suspend fun TagPrzezId(id: Int): Tag
 
     @Insert
-    fun dodajTag(tag: Tag)
+    suspend fun dodajTag(tag: Tag)
 
     @Delete
-    fun delete(tag: Tag)
+    suspend fun delete(tag: Tag)
 }
 
 @Dao
 interface IOgloszenie {
     @Query("SELECT * FROM ogloszenia")
-    fun wszystkieOgloszenia(): List<Ogloszenie>
+    suspend fun wszystkieOgloszenia(): List<Ogloszenie>
+
+    @Query("SELECT * FROM ogloszenia WHERE id=:id")
+    suspend fun ogloszeniePrzezId(id: Int): Ogloszenie
+
 
     @Insert
-    fun dodajOgloszenie(ogloszenie: Ogloszenie)
+    suspend fun dodajOgloszenie(ogloszenie: Ogloszenie)
 
     @Delete
-    fun delete(ogloszenie: Ogloszenie)
+    suspend fun delete(ogloszenie: Ogloszenie)
 }
