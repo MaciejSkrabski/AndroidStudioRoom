@@ -41,7 +41,7 @@ abstract class SlupOgloszeniowyDB: RoomDatabase(){
 
         private fun buildDatabase(context: Context): SlupOgloszeniowyDB {
             return Room.databaseBuilder(context, SlupOgloszeniowyDB::class.java, DATABASE)
-                .build()
+                .fallbackToDestructiveMigration().build()
         }
     }
 }
