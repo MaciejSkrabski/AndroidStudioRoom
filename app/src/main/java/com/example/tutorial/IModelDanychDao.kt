@@ -26,7 +26,7 @@ interface IOsoba {
     fun dodajOsobe(osoba: Osoba)
 
     @Delete
-    fun delete()
+    fun delete(osoba: Osoba)
 }
 
 @Dao
@@ -39,7 +39,7 @@ interface ITag {
     fun dodajTag(tag: Tag)
 
     @Delete
-    fun delete()
+    fun delete(tag: Tag)
 }
 
 @Dao
@@ -51,5 +51,5 @@ interface IOgloszenie {
     fun dodajOgloszenie(ogloszenie: Ogloszenie)
 
     @Delete
-    fun delete()
+    fun delete(ogloszenie: Ogloszenie)
 }

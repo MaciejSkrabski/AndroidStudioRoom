@@ -7,14 +7,14 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Danie (
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int=0,
     val name: String,
     val desc: String
 )
 
 @Entity(tableName = "osoby")
 data class Osoba (
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int=0,
     val imie: String,
     val nazwisko: String
 
@@ -25,16 +25,16 @@ data class Osoba (
     childColumns = arrayOf("autor"),
     onDelete = ForeignKey.CASCADE)])
 data class Ogloszenie (
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val tytul: String,
     val tresc: String,
     val autor: Int,
-    @Embedded
-    val tag: Tag?
+    val tag: String
 
 )
 
 @Entity(tableName="tagi")
 data class Tag (
+    @PrimaryKey(autoGenerate = true) val id: Int=0,
     val tag: String
 )
