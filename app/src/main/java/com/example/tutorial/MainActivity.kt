@@ -9,10 +9,7 @@ import android.widget.Toast
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -35,27 +32,47 @@ class MainActivity : AppCompatActivity() {
             dodajOsobe(db, o)
         }
 
+        val os = runBlocking { selectOsobyById(db, 0) } // jakbym podrzucił referencję to nie musiałbym blokować
+        d("os", "${os.toString()}")
+
 
     }
 
-    fun dodajOsobe(db: SlupOgloszeniowyDB, o:Osoba){
+    fun dodajOsobe(db: SlupOgloszeniowyDB, o: Osoba) { //insert
         // Start a coroutine
-        GlobalScope.launch{
+        GlobalScope.launch {
             d("tgb", "${o.toString()}")
-            db.osobaDao().dodajOsobe(o)}
+            db.osobaDao().dodajOsobe(o)
+        }
     }
 
-    fun getOsoby(db: SlupOgloszeniowyDB){
+    fun getOsoby(db: SlupOgloszeniowyDB) { //select *
 
         // Start a coroutine
-        GlobalScope.launch{
+        GlobalScope.launch {
             d("raz", "raz")
 
             val l = db.osobaDao().wszystkieOsoby()
             d("dł: ", "${l.size}")
             l.forEach {
 
-                d("Ogloszenia!: ", "${it.imie}, ${it.nazwisko}") }
+                d("Ogloszenia!: ", "${it.imie}, ${it.nazwisko}")
+            }
         }
     }
+
+    suspend fun selectOsobyById(db: SlupOgloszeniowyDB, id: Int): Osoba { //select by id
+        d("osoba przez id", "osoba przez id")
+        return db.osobaDao().OsobaPrzezId(id)
+    }
+
+
+    fun usunOsobe(db: SlupOgloszeniowyDB, os: Osoba) {
+        GlobalScope.launch {
+            d("us", "usunięto")
+            db.osobaDao().delete(os)
+        }
+    }
+
+
 }
