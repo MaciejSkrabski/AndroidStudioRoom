@@ -1,5 +1,6 @@
 package com.example.tutorial
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
@@ -8,6 +9,11 @@ import android.widget.Toast
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,29 +23,41 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val db = SlupOgloszeniowyDB.getInstance(this)
+        val o = Osoba(0, "Maciek", "Skrabski")
 
 
+        gOs(db)
 
-
-        /*val wszystkieDania = db.danieDao().pobierzWszystkieDania()
-
-        wszystkieDania.forEach{
-            textView.append("\n id: ${it.id}, nazwa:${it.name}, opis:${it.desc}")
-        }
-        d("dania", "ile dań? ${wszystkieDania.size}")
-
-
-        var add = findViewById<Button>(R.id.buttonAdd)
+        val add = findViewById<Button>(R.id.buttonAdd)
         add.setOnClickListener {
             Toast.makeText(this, "Guzik!", Toast.LENGTH_SHORT).show()
-            dodaj(db)
-        }*/
+            d("oto obiekt:", "${o.toString()}")
+            dOs(db, o)
+        }
+
+
     }
 
-//    fun dodajOgloszenie(db: SlupOgloszeniowyDB, ogloszenie: Ogloszenie) {
-//        db.ogloszenieDao().dodajOgloszenie(ogloszenie)
-//            //.dodajDanie(Danie(name=edit_text_name.text.toString(), desc=edit_text_desc.text.toString()))
-//    }
+    fun dOs(db: SlupOgloszeniowyDB, o:Osoba){
+        // Start a coroutine
+        GlobalScope.launch{
+            d("tgb", "${o.toString()}")
+            db.osobaDao().dodajOsobe(o)}
+    }
 
+    fun gOs(db: SlupOgloszeniowyDB){
+        runBlocking {
+            delay(15000)
+        }
+        // Start a coroutine
+        GlobalScope.launch{
+            d("raz", "raz")
 
+            val l = db.osobaDao().wszystkieOsoby()
+            d("dł: ", "${l.size}")
+            l.forEach {
+
+                d("Ogloszenia!: ", "${it.imie}, ${it.nazwisko}") }
+        }
+    }
 }
