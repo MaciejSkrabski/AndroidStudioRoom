@@ -26,29 +26,27 @@ class MainActivity : AppCompatActivity() {
         val o = Osoba(0, "Maciek", "Skrabski")
 
 
-        gOs(db)
+        getOsoby(db)
 
         val add = findViewById<Button>(R.id.buttonAdd)
         add.setOnClickListener {
             Toast.makeText(this, "Guzik!", Toast.LENGTH_SHORT).show()
             d("oto obiekt:", "${o.toString()}")
-            dOs(db, o)
+            dodajOsobe(db, o)
         }
 
 
     }
 
-    fun dOs(db: SlupOgloszeniowyDB, o:Osoba){
+    fun dodajOsobe(db: SlupOgloszeniowyDB, o:Osoba){
         // Start a coroutine
         GlobalScope.launch{
             d("tgb", "${o.toString()}")
             db.osobaDao().dodajOsobe(o)}
     }
 
-    fun gOs(db: SlupOgloszeniowyDB){
-        runBlocking {
-            delay(15000)
-        }
+    fun getOsoby(db: SlupOgloszeniowyDB){
+
         // Start a coroutine
         GlobalScope.launch{
             d("raz", "raz")
